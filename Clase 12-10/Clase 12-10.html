@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<center>
+<form>
+  <label for="">Ingresa Nombre</label>
+  <input type="text" id="nombre" name="nombre"><br><br>
+
+  <label for="">Ingresese Apellidos</label>
+  <input type="text" id="apellidos" name="numero"><br><br>
+
+  <label for="">Ingrese Edad</label>
+  <input type="text" id="edad" name="numero"><br><br>
+
+  <label for="">Seleccione Sexo</label>
+  <select id="sexo">
+    <option value="">Seleccione</option>
+    <option value="1">Masculino</option>
+    <option value="0">Femenino</option>
+  </select><br><br>
+
+  <!--<label for="">Seleccione Fotos</label>
+  <input type="file" id="foto" name="foto"><br><br>-->
+
+  <input type="button" id="verificar" value="Enviar">
+</form>
+</center>
+<script src="jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.7/dist/sweetalert2.all.min.js"></script>
+<script>
+  $("#verificar").click(function(){
+    let nombre = $("#nombre").val();
+    let apellidos = $("#apellidos").val();
+    let edad = $("#edad").val();
+    let sexo = $("#sexo").val();
+
+    if(nombre == ""){
+      $("#nombre").focus();
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Ingresa el nombre!',
+      })
+      return false;
+    }
+
+    if(apellidos == ""){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Ingresa apellidos!',
+      })
+      $("#apellidos").focus();
+      return
+    }
+
+    if(edad == ""){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Ingresa edad!',
+      })
+      $("#edad").focus();
+      return
+    }
+
+    if(sexo == ""){
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Ingresa sexo!',
+      })
+      $("#sexo").focus();
+      return
+    }
+  });
+</script>
+</body>
+</html>
