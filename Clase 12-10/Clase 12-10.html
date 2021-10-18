@@ -1,4 +1,4 @@
-<!doctype html>
+<!--<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -25,10 +25,6 @@
     <option value="1">Masculino</option>
     <option value="0">Femenino</option>
   </select><br><br>
-
-  <!--<label for="">Seleccione Fotos</label>
-  <input type="file" id="foto" name="foto"><br><br>-->
-
   <input type="button" id="verificar" value="Enviar">
 </form>
 </center>
@@ -82,5 +78,101 @@
     }
   });
 </script>
+</body>
+</html>-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .Borde{
+            border: 4px solid black;
+        }
+    </style>
+</head>
+<body>
+<center>
+    <table class="Borde">
+        <tr>
+            <td><b>Nombre</b></td>
+            <td><b>Apellidos</b></td>
+            <td>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                José David
+            </td>
+            <td>
+                Vite Bautista
+            </td>
+            <td>
+                <button class="mostrar" nombre="José David" apellidos="Vite Bautista" sexo="Masculino" edad="19" gustos="Escuchar Musica">Detalles</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Juan Ignacio
+            </td>
+            <td>
+                Lopez Zepeda
+            </td>
+            <td>
+                <button class="mostrar" nombre="Juan Ignacio" apellidos="Lopez Zepeda" sexo="Masculino" edad="?" gustos="?">Detalles</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Lesly Pholett
+            </td>
+            <td>
+                Ibarra Pantoja
+            </td>
+            <td>
+                <button class="mostrar" nombre="Lesly Pholett" apellidos="Ibarra Pantoja" sexo="Femenino" edad="?" gustos="?">Detalles</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Pedro Uriel
+            </td>
+            <td>
+                Rivero Ensiso
+            </td>
+            <td>
+                <button class="mostrar" nombre="Pedro Uriel" apellidos="Rivero Ensiso" sexo="Masculino" edad="?" gustos="?">Detalles</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Orlando
+            </td>
+            <td>
+                Garcia Olguin
+            </td>
+            <td>
+                <button class="mostrar" nombre="Orlando" apellidos="Garcia Olguin" sexo="Masculino" edad="?" gustos="?">Detalles</button>
+            </td>
+        </tr>
+    </table>
+</center>
+<script src="jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.7/dist/sweetalert2.all.min.js"></script>
+<script>
+    $(".mostrar").click(function() {
+        nombre = $(this).attr("nombre");
+        apellidos = $(this).attr("apellidos");
+        sexo = $(this).attr("sexo");
+        edad = $(this).attr("edad");
+        gustos = $(this).attr("gustos");
+        Swal.fire('Informacion', nombre + " " + apellidos + "<br>" + sexo + "<br>" + edad + "<br>" + gustos);
+    });
+</script>
+
 </body>
 </html>
