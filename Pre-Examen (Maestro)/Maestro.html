@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arlet</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+<div class="container-fluid">
+  <main>
+    <div class="py-5 text-center">
+      <h2>Carrito de compras</h2>
+      <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+    </div>
+    <div class="row g-5">
+      <div class="col-md-4 col-lg-4 order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-primary">Lista</span>
+          <span class="badge bg-primary rounded-pill" id="cantidad-carrito"></span>
+        </h4>
+        <ul class="list-group mb-3">
+          <div id="pizarra">
+
+          </div>
+        </ul>
+      </div>
+      <div class="col-md-8 col-lg-8">
+        <h4 class="mb-3">Agregar Producto</h4>
+        <div class="row g-3">
+          <div class="col-sm-2">
+            <label for="firstName" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" placeholder="" value="" required="">
+          </div>
+          <div class="col-sm-2">
+            <label for="lastName" class="form-label">Matricula</label>
+            <input type="text" class="form-control" id="matricula" placeholder="" value="" required="">
+          </div>
+          <div class="col-sm-2">
+            <label for="lastName" class="form-label">Sexo</label>
+            <select class="form-control" id="sexo">
+              <option value="1">Masculino</option>
+              <option value="0">Femenino</option>
+            </select>
+          </div>
+          <div class="col-sm-2">
+            <label for="lastName" class="form-label">Calificación</label>
+            <input type="text" class="form-control" id="calificacion" placeholder="" value="" required="">
+          </div>
+          <div class="col-sm-2">
+            <label for="lastName" class="form-label">Grupo</label>
+            <input type="text" class="form-control" id="grupo" placeholder="" value="" required="">
+          </div>
+        </div>
+        <hr class="my-4">
+        <button class="w-100 btn btn-primary btn-lg" id="btn-agregar">Agregar</button>
+        <br>
+        <hr class="my-4">
+        <div class="col-sm-3 offset-6">
+          <label for="lastName" class="form-label">Sexo</label>
+          <select class="form-control" id="opcion">
+            <option value="1">Cantidad de alumnos</option>
+            <option value="2">Cantidad de alumnos por sexo</option>
+            <option value="3">Media Calificaciones</option>
+            <option value="4">Buscar Alumno por matricula</option>
+            <option value="5">Conjunto de alumnos</option>
+            <option value="6">Mostrar grupo</option>
+          </select>
+          <button class="w-100 btn btn-primary btn-lg" id="btn-opcion">OK</button>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="jquery.min.js"></script>
+<script>
+  $(document).ready(function(){ // - Cuando el documento este listo
+
+    var alumnos = []; // - Arreglo para guardar los alumnos
+    var grupos = [];
+    // - Funcion para agregar productos al carrito al darle click al boton
+    $("#btn-agregar").click(function(){
+      let alumno = {
+        "nombre" : $("#nombre").val(),
+        "matricula" : $("#matricula").val(),
+        "calificacion" : $("#calificacion").val(),
+        "sexo" : $("#sexo").val(),
+        "grupo" : $("#grupo").val()
+      };
+
+      let existe = false;
+      for(let i = 0; i < grupos.length; i++){
+        if(grupos[i] == $("#grupo").val()){
+          existe = true;
+        }
+      }
+      if(existe == false){
+        grupos.push($("#grupo").val());
+      }
+
+      alumnos.push(alumno);
+      $("#pizarra").append('<li class="list-group-item d-flex justify-content-between bg-light"><div class="text-success"><h6 class="my-0">'+alumno.nombre+'</h6><small>'+alumno.matricula+'</small></div><span class="text-success">'+alumno.calificacion+'</span></li>');
+      console.log(alumnos);
+    });
+
+    $("#btn-opcion").click(function(){
+      let opc = $("#opcion").val();
+
+      switch(opc){
+        case "1":
+          sumarAlumnos(alumnos);
+          break;
+        case "2":
+          sumarGeneros(alumnos)
+          break;
+        case "3":
+          mediaCalificaciones(alumnos);
+          break;
+        case "4":
+          let matricula = prompt("Ingrese la matricula del alumno");
+          for(let i = 0; i < alumnos.length; i++){
+            if(alumnos[i].matricula == matricula){
+              alert("Nombre: "+alumnos[i].nombre+"\nMatricula: "+alumnos[i].matricula+"\nCalificacion: "+alumnos[i].calificacion+"\nSexo: "+alumnos[i].sexo+"\nGrupo: "+alumnos[i].grupo);
+            }
+          }
+          break;
+        case "5":
+          let conjunto = [];
+          let nAlumnos = prompt("Ingrese la cantidad de alumnos");
+          for(let i = 0; i < nAlumnos; i++){
+            let matricula = prompt("Ingrese la matricula del alumno");
+            for(let j = 0; j < alumnos.length; j++){
+              if(alumnos[j].matricula == matricula){
+                conjunto.push(alumnos[j]);
+              }
+            }
+          }
+          sumarAlumnos(conjunto);
+          sumarGeneros(conjunto);
+          mediaCalificaciones(conjunto);
+          break;
+        case "6":
+          mostrarGrupo(alumnos);
+          break;
+
+      }
+    });
+
+    function sumarAlumnos (elementos){
+      let cantidad = elementos.length;
+      alert("Cantidad de alumnos: "+cantidad);
+    }
+
+    function sumarGeneros(elementos){
+      let cantidadM = 0;
+      let cantidadF = 0;
+      for(let i = 0; i < elementos.length; i++){
+        if(elementos[i].sexo == 1){
+          cantidadM++;
+        }else{
+          cantidadF++;
+        }
+      }
+      alert("Cantidad de alumnos masculinos: "+cantidadM+"\nCantidad de alumnos femeninos: "+cantidadF);
+    }
+
+    function mediaCalificaciones(elementos){
+      let suma = 0;
+      for(let i = 0; i < elementos.length; i++){
+        suma += parseInt(elementos[i].calificacion);
+      }
+      alert("Media de calificaciones: "+suma/elementos.length);
+    }
+
+    function mostrarGrupo(elementos){
+      let gruposActuales = "";
+      for(let i = 0; i < grupos.length; i++){
+        gruposActuales += grupos[i]+"\n";
+      }
+      alert("Grupos actuales: \n"+gruposActuales);
+      var eleccion = prompt("Ingrese el grupo que desea mostrar");
+      let grupo = [];
+      for(let i = 0; i < elementos.length; i++){
+        if(elementos[i].grupo == eleccion){
+          grupo.push(elementos[i]);
+        }
+      }
+      for(let i = 0; i < grupo.length; i++){
+        alert("Nombre: "+grupo[i].nombre+"\nMatricula: "+grupo[i].matricula+"\nCalificacion: "+grupo[i].calificacion+"\nSexo: "+grupo[i].sexo+"\nGrupo: "+grupo[i].grupo);
+      }
+    }
+  });
+</script>
+</html>
